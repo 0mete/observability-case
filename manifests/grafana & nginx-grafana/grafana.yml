@@ -1,4 +1,4 @@
-adminPassword: trendyol
+adminPassword: metedeneme
 ingress:
   annotations:
     nginx.org/mergeable-ingress-type: minion

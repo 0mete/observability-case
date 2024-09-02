@@ -1,0 +1,54 @@
+PUT _ilm/policy/fluent-bit-policy
+{
+  "policy": {
+    "phases": {
+      "hot": {
+        "min_age": "0ms",
+        "actions": {
+          "set_priority": {
+            "priority": 100
+          },
+          "rollover": {
+            "max_size": "1gb",
+            "max_primary_shard_size": "1gb",
+            "max_age": "1d"
+          }
+        }
+      },
+      "delete": {
+        "min_age": "7d",
+        "actions": {
+          "delete": {
+            "delete_searchable_snapshot": true
+          }
+        }
+      }
+    }
+  }
+}
+
+PUT /_index_template/fluent-bit
+{
+  "index_patterns": ["fluent-bit-kube-*"],
+  "template": {
+    "settings": {
+      "index": {
+        "lifecycle": {
+          "name": "fluent-bit-policy",
+          "rollover_alias": "fluent-bit-kube"
+        },
+        "number_of_shards": "1",
+        "number_of_replicas": "0"
+      }
+    }
+  }
+}
+
+PUT /%3Cfluent-bit-kube-%7Bnow%2Fd%7D-000001%3E
+{
+  "aliases": {
+    "fluent-bit-kube": {
+      "is_write_index": true
+    }
+  }
+}
