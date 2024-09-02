@@ -1,0 +1,27 @@
+# permissions for end users to edit pods.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: obs-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: pod-editor-role
+rules:
+- apiGroups:
+  - core.grafana.capar.dev
+  resources:
+  - pods
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - core.grafana.capar.dev
+  resources:
+  - pods/status
+  verbs:
+  - get

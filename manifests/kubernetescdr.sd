@@ -1,1 +1,3 @@
 brew install kubebuilder
+kubebuilder init --owner 0mete --domain grafana.capar.dev
+kubebuilder create api --group core --version v1 --kind Pod

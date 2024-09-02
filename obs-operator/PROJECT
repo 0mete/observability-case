@@ -7,4 +7,14 @@ layout:
 - go.kubebuilder.io/v4
 projectName: obs-operator
 repo: obs-operator
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: grafana.capar.dev
+  group: core
+  kind: Pod
+  path: obs-operator/api/v1
+  version: v1
 version: "3"
