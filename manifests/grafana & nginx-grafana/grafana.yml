@@ -1,0 +1,15 @@
+adminPassword: trendyol
+ingress:
+  annotations:
+    nginx.org/mergeable-ingress-type: minion
+    nginx.org/rewrites: serviceName=grafana rewrite=/
+  enabled: true
+  hosts:
+    - grafana.capar.dev
+  path: /grafana/
+  pathType: Prefix
+persistence:
+  enabled: true
+  type: pvc
+image:
+  tag: "11.1.0"
